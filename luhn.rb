@@ -16,21 +16,19 @@ class Luhn
   end
 
   def self.valid?(string)
+    string.gsub!(" ", "")
     return false if string.length <= 1
     # unless digit or space return false, & take out valid white space
     array = []
 
     string.each_char.with_index do |char| #O(n)
       digit = /[\d]/
-      regex = /[\d\s]/
-      if !regex.match(char)
+      if !digit.match(char)
         return false
-      elsif digit.match(char)
+      else
         array << char.to_i
       end
     end
-    return false if array.length <= 1
-
 
     index = array.length - 1
     odd = 0 # don't start with first iteration, start w/ second
