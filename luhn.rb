@@ -18,16 +18,13 @@ class Luhn
   def self.valid?(string)
     string.gsub!(" ", "")
     return false if string.length <= 1
+    return false if /[\D]/.match(string)
+
     # unless digit or space return false, & take out valid white space
     array = []
 
     string.each_char.with_index do |char| #O(n)
-      digit = /[\d]/
-      if !digit.match(char)
-        return false
-      else
-        array << char.to_i
-      end
+      array << char.to_i
     end
 
     index = array.length - 1
@@ -43,10 +40,8 @@ class Luhn
       odd += 1
     end
 
-    if sum % 10 == 0
-      return true
-    else
-      return false
-    end
+
+    return true if sum % 10 == 0
+    return false
   end
 end
