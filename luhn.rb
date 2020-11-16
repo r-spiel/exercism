@@ -40,7 +40,6 @@ class Luhn
       odd += 1
     end
 
-
     return true if sum % 10 == 0
     return false
   end
